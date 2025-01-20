@@ -21,3 +21,5 @@ let primaryContact:Contact = {
   state: "CA",
   postalCode: "98763-89",
 }
+
+console.log(primaryContact);
