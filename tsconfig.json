@@ -1,9 +1,7 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "outDir": "dist"
+        "outDir": "build"
     },
-    "include": [
-        "**.ts"
-    ]
+    "include": ["src/app.ts"]
 }
