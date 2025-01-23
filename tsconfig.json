@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "noEmit": true
+        "noEmit": false
     },
     "include": ["src/**/*"]
 }

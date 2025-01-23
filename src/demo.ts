@@ -12,5 +12,14 @@ interface Contact  {
 let primaryContact: Contact = {
     id: 12345,
     name: "Jamie Johnson",
-    status: "active"
+    status: "active",
+    birthDate: "08-04-1986"
 }
+
+type ContactFields = keyof Contact;
+
+function getValue<T, U extends keyof T>(source:T, property:U) {
+    return source[property];
+}
+
+console.log(getValue(primaryContact, "birthDate"));
