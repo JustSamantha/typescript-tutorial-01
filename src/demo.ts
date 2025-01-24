@@ -46,5 +46,7 @@ const filteredContacts = searchContacts(
     {
         id: { matches: (id) => id === 123 },
         name: { matches: (name) => name === "Carol Weaver" },
+        status: { matches: (status) => status === "new" },
+        address: { matches: (address) => address.street === "500 Main St." },
     }
 );
