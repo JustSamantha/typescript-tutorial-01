@@ -4,12 +4,12 @@ interface Contact {
 
 const currentUser = {
     id: 1234,
-    roles: ["ContactEditor"],
+    roles: ["ContactEditor", "ContactViewer"],
     isAuthenticated(): boolean {
         return true
     },
     isInRole(role: string): boolean {
-        return this.roles.contains(role);
+        return this.roles.includes(role);
     }
 }
 
@@ -50,9 +50,24 @@ function singleton<T extends { new(...args: any[]): {} }>(constructor: T) {
     }
 }
 
-@freeze
+function auditable(target: object, key: string |  symbol) {
+    let val = target[key];
+
+    Object.defineProperty(target, key, {
+        get: () => val,
+        set: (newVal) => {
+            console.log(`${key.toString()} changed: `, newVal);
+            val = newVal;
+        },
+        enumerable: true,
+        configurable: true,
+    });
+}
+
+// @freeze
 @singleton
 class ContactRepository {
+    @auditable
     private contacts: Contact[] = [];
 
     @authorize("ContactViewer")
@@ -72,3 +87,7 @@ class ContactRepository {
         }
     }
 }
+
+let myContactRepository = new ContactRepository();
+myContactRepository.save(currentUser);
+console.log(myContactRepository.getContactById(1234));
